@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2C3A46"
+    android:orientation="vertical"
+    tools:context=".LiveDemo_Mergesort">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="70dp">
+
+        <TextView
+            android:id="@+id/fiftyTextView"
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginEnd="5dp"
+            android:background="#ffffff"
+            android:text="@string/_50" />
+        <TextView
+            android:id="@+id/twentyTextView"
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginEnd="5dp"
+            android:background="#ffffff"
+            android:text="@string/_20"/>
+
+        <TextView
+            android:id="@+id/sixtyfiveTextView"
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:layout_marginEnd="5dp"
+            android:text="@string/_65"/>
+        <TextView
+            android:id="@+id/fifteenTextView"
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:textAlignment="center"
+            android:layout_marginEnd="2.5dp"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:text="@string/_15"/>
+
+        <TextView
+            android:id="@+id/firstDivide"
+            android:layout_width="1dp"
+            android:layout_height="60dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:background="#ffffff"
+           />
+        <TextView
+            android:id="@+id/thirtyfiveTextView"
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:textAlignment="center"
+            android:layout_marginStart="2.6dp"
+            android:gravity="center"
+            android:layout_marginEnd="5dp"
+            android:background="#ffffff"
+            android:text="@string/_35"/>
+
+        <TextView
+            android:id="@+id/fiveTextView"
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:layout_marginEnd="5dp"
+            android:text="@string/_5"/>
+
+        <TextView
+            android:id="@+id/nineteenTextView"
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:text="@string/_19"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:useDefaultMargins="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:visibility="invisible"
+            android:background="#ffffff">
+
+
+        </TextView>
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:visibility="invisible"
+
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:id="@+id/secondDivide"
+            android:layout_width="3dp"
+            android:layout_height="60dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="7dp"
+            android:visibility="invisible"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="7dp"
+            android:visibility="invisible"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="7dp"
+            android:visibility="invisible"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="7dp"
+            android:visibility="invisible"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="7dp"
+            android:visibility="invisible"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="7dp"
+            android:visibility="invisible"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:useDefaultMargins="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
+
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
+
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:useDefaultMargins="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="33dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
+
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+
+            android:background="#ffffff">
+            <!-- android:visibility="invisible"-->
+        </TextView>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/startBtn"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:text="@string/start">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2C3A46"
+    android:orientation="vertical"
+    tools:context=".Mergesort">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp">
+
+        <TextView
+            android:id="@+id/mergesortTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mergesort"
+            android:textSize="25sp"
+            android:textColor="#ffffff"
+            android:gravity="center" />
+        <View
+            android:layout_width="105dp"
+            android:layout_height="3dp"
+            android:background="#a8b5c9"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        >
+
+        <Button
+            android:id="@+id/descriptionBtn"
+            android:layout_width="245dp"
+            android:layout_height="107dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_round"
+            android:gravity="center"
+            android:text="@string/what_is_mergesort" />
+
+        <Button
+            android:id="@+id/live_demoBtn"
+            android:layout_width="245dp"
+            android:layout_height="107dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/btn_round"
+            android:gravity="center"
+            android:text="@string/live_demo" />
+
+        <Button
+            android:id="@+id/complexitiesBtn"
+            android:layout_width="245dp"
+            android:layout_height="107dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/btn_round"
+            android:gravity="center"
+            android:text="@string/time_space_complexities" />
+    </LinearLayout>
+
+</LinearLayout>

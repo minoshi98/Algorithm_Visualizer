@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MyProject</string>
+    <string name="if_arr_j_pivot"><![CDATA[if(arr[j] < pivot)]]></string>
+    <string name="swap_arr_j_and_arr_i">swap arr[j] and arr[i]</string>
+    <string name="j">j</string>
+    <string name="i">i</string>
+    <string name="mergesort">Mergesort</string>
+    <string name="what_is_mergesort">What is mergesort?</string>
+    <string name="live_demo">live demo</string>
+    <string name="time_space_complexities">time/space complexities</string>
+    <string name="_50">50</string>
+    <string name="_20">20</string>
+    <string name="_65">65</string>
+    <string name="_15">15</string>
+    <string name="_35">35</string>
+    <string name="_5">5</string>
+    <string name="_19">19</string>
+    <string name="start">Start</string>
+</resources>
