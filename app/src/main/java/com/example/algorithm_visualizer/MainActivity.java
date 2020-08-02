@@ -1,7 +1,6 @@
-package com.example.myproject;
+package com.example.algorithm_visualizer;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ButtonBarLayout;
 
 import android.content.Intent;
 import android.os.Bundle;

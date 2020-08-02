@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myproject">
+    package="com.example.algorithm_visualizer">
 
     <application
         android:allowBackup="true"
@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LiveDemo_Mergesort"></activity>
-        <activity android:name=".Mergesort" />
-        <activity android:name=".LiveDemo_Quicksort" />
-        <activity android:name=".Quicksort" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.algorithm_visualizer.LiveDemo_Mergesort"></activity>
+        <activity android:name="com.example.algorithm_visualizer.Mergesort" />
+        <activity android:name="com.example.algorithm_visualizer.LiveDemo_Quicksort" />
+        <activity android:name="com.example.algorithm_visualizer.Quicksort" />
+        <activity android:name="com.example.algorithm_visualizer.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

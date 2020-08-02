@@ -1,4 +1,4 @@
-package com.example.myproject;
+package com.example.algorithm_visualizer;
 
 import org.junit.Test;
 

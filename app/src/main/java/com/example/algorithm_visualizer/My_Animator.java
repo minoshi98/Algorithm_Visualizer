@@ -1,4 +1,4 @@
-package com.example.myproject;
+package com.example.algorithm_visualizer;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
