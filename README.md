@@ -1,3 +1,4 @@
 # Algorithm_Visualizer
-Implemented Quicksort.
-AndroidappthatvisualizesCS310algorithms(sorting,search,etc)using animations as teaching aid.
+Android app that visualizes CS310 algorithms(sorting,search,etc) using animations as teaching aid.
+
+Quicksort animation done. 
