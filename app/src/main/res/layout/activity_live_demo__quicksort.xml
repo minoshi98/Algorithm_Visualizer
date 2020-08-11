@@ -92,6 +92,8 @@
             android:id="@+id/ivalueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
+
             android:text="i ="
             android:textColor="#ffffff"
             android:textSize="20sp" />
@@ -99,6 +101,8 @@
         <TextView
             android:id="@+id/jvalueTextView"
             android:layout_width="wrap_content"
+            android:visibility="invisible"
+
             android:layout_height="wrap_content"
             android:text="j ="
             android:textColor="#ffffff"
@@ -139,6 +143,8 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="20dp"
                android:text="Pivot:"
+               android:visibility="invisible"
+
                android:textColor="#ffffff"
                android:textSize="16sp"
                />
@@ -148,6 +154,8 @@
                android:layout_height="wrap_content"
                android:layout_marginStart="23dp"
                android:layout_marginTop="20dp"
+               android:visibility="invisible"
+
                android:textColor="#ffffff"
                android:textSize="16sp"
                />
@@ -163,6 +171,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="High:"
+            android:visibility="invisible"
+
             android:textColor="#ffffff"
             android:textSize="16sp"
             />
@@ -174,6 +184,7 @@
            android:layout_marginStart="26dp"
            android:layout_marginTop="20dp"
            android:text=""
+           android:visibility="invisible"
            android:textColor="#ffffff"
            android:textSize="16sp"
            />
@@ -190,7 +201,9 @@
                 android:layout_marginTop="20dp"
                 android:text="Low:"
                 android:textColor="#ffffff"
-                android:textSize="16sp" />
+               android:visibility="invisible"
+
+               android:textSize="16sp" />
            <TextView
                 android:id="@+id/lowValueTextView"
                 android:layout_width="wrap_content"
@@ -199,6 +212,7 @@
                 android:layout_marginStart="29dp"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
+                android:visibility="invisible"
                  />
        </LinearLayout>
 

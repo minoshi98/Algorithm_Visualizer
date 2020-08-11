@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import com.example.algorithm_visualizer.instructions.Instructions;
+import com.example.algorithm_visualizer.instructions.SwapInstruction;
 
 public class LiveDemo_Quicksort extends AppCompatActivity {
     Button startBtn;
@@ -17,10 +19,7 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
     lowLabelTextView, highLabelTextView, lowValueTextView, highValueTextView, pivotLabelTextView,
             ivalueTextView, jvalueTextView, pivotValueTextView, conditionTextView, jpositionTextView, ipositionTextView;
 
-
-    AnimatorSet set;
-
-    My_Animator myAnimator = new My_Animator();
+    Animation_Helper animation_helper = new Animation_Helper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
                 int[] array = new int[6];
                 initialize_textView_array(textView_array);
                 initialize_array(array);
-                ArrayList<TextView[]> instructions = new ArrayList<TextView[]>();
+                ArrayList<Instructions> instructions = new ArrayList<>();
 
 
                 int low = 0;
@@ -74,8 +73,8 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
 
 
                 quicksort(array,low,high,instructions,textView_array);
+                animation_helper.animate(instructions,0);
 
-                swap(instructions,textView_array,i);
 
                 }
 
@@ -83,39 +82,7 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
     }
 
 
-    public void swap(ArrayList<TextView[]> instructions, TextView[] array, int i) {
-        if (i >= instructions.size()) {
-          return;
-        }
-        TextView[] instruction = instructions.get(i);
-        int leftIndex = Arrays.asList(array).indexOf(instruction[0]);
-        int rightIndex = Arrays.asList(array).indexOf(instruction[1]);
-
-        if (leftIndex == rightIndex) {
-            swap(instructions, array, i + 1);
-            return;
-        }
-
-        myAnimator.swapElements(array, array[leftIndex], array[rightIndex], () -> {
-            // on Animation end code
-
-            //need to swap text views here
-            TextView temp = array[leftIndex];
-            array[leftIndex] = array[rightIndex];
-            array[rightIndex] = temp;
-
-            swap(instructions, array, i + 1);
-
-
-        });
-    }
-
-
-
-
-
-
-    public void quicksort(int arr[], int low, int high,ArrayList<TextView[]> inst,TextView[] textView_array) {
+    public void quicksort(int arr[], int low, int high,ArrayList<Instructions> inst,TextView[] textView_array) {
 
         if(low < high) {
 
@@ -129,7 +96,8 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
 
     }
 
-    public int partition(int arr[], int low, int high,ArrayList<TextView[]> inst,TextView[] textView_array) {
+    public int partition(int arr[], int low, int high, ArrayList<Instructions> inst, TextView[] textView_array) {
+
 
         int pivot = arr[high];
         int temp = 0;
@@ -145,7 +113,7 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
                 TextView pair[] = new TextView[2];
                 pair[0] = textView_array[i];
                 pair[1] = textView_array[j];
-                inst.add(pair);
+                inst.add(new SwapInstruction(textView_array, pair[0], pair[1]));
 
                 //swap arr[i] and arr[j]
                 temp = arr[i];
@@ -166,7 +134,7 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
         TextView[] pair = new TextView[2];
         pair[0] = textView_array[i+1];
         pair[1] = textView_array[high];
-        inst.add(pair);
+        inst.add(new SwapInstruction(textView_array, pair[0], pair[1]));
 
         //swap arr[i+1] and arr[high]
         temp = arr[i+1];
