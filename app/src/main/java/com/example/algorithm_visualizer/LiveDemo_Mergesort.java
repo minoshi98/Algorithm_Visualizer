@@ -7,24 +7,42 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.TextClock;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.algorithm_visualizer.instructions.BlinkInstruction;
+import com.example.algorithm_visualizer.instructions.HighlightInstruction;
+import com.example.algorithm_visualizer.instructions.Instructions;
+import com.example.algorithm_visualizer.instructions.SetMinimumTextInstruction;
+import com.example.algorithm_visualizer.instructions.SetRowInvisible;
+import com.example.algorithm_visualizer.instructions.SetTextInstruction;
+import com.example.algorithm_visualizer.instructions.SetVisibileInstruction;
+import com.example.algorithm_visualizer.instructions.UnhighlightInstruction;
+
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class LiveDemo_Mergesort extends AppCompatActivity {
 
     TextView row0col0, row0col1, row0col2, row0col3, row0col4, row0col5,
             row0col6, row1col0, row1col1, row1col2, row1col3, row1col4, row1col5, row1col6, row2col0, row2col1, row2col2, row2col3,
-            row2col4, row2col5, row2col6,row3col0, row3col1, row3col2, row3col3, row3col4, row3col5, row3col6;
+            row2col4, row2col5, row2col6,row3col0, row3col1, row3col2, row3col3, row3col4, row3col5, row3col6, mergeValues;
     GridLayout firstrow,secondrow,thirdrow;
 
-    Button startBtn;
-    Animation_Helper animator = new Animation_Helper();
+    Button nextBtn, prevBtn, startBtn;
+
+    //Animation helpers
+    Animation_Helper animation_helper = new Animation_Helper();
+
+    //--end
+
+    int increment = -1;
+    int enteredmerge = 0;
     int i = -1;
 
     @Override
@@ -65,8 +83,13 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
         row3col5 = (TextView) findViewById(R.id.row3col5);
         row3col6 = (TextView) findViewById(R.id.row3col6);
 
+
+
         //--Buttons
+        //nextBtn = (Button) findViewById(R.id.nextBtn);
+     //   prevBtn = (Button) findViewById(R.id.prevBtn);
         startBtn = (Button) findViewById(R.id.startBtn);
+
         int[] array = new int[7];
 
         //Grid Layouts (rows)
@@ -97,89 +120,175 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
         row_arrays.add(thirdrow_array);
         row_arrays.add(fourthrow_array);
 
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        ArrayList<Instructions> inst = new ArrayList<Instructions>();
+        merge_sort(array,0,array.length-1, inst, row_arrays);
+        startBtn.setOnClickListener(view -> {
+          //merge_sort(array,0,array.length-1, inst, row_arrays);
+            animation_helper.animate(inst,0);
 
-                sort(array, 0, array.length - 1, grid_rows,row_arrays);
+        });
+        /*
+        nextBtn.setOnClickListener(view -> {
+            incrementI();
+         //   merge_sort(array, 0, array.length - 1, inst,row_arrays);
 
+            animation_helper.animate(inst,i);
+            Log.d("INST", String.valueOf(inst.get(i)));
+       //     animation_helper.displayArrayList(textViewsToBeHighlighted);
+        });
+
+        prevBtn.setOnClickListener(view -> {
+            try {
+                decrementI();
+                merge_sort(array, 0, array.length - 1, inst, row_arrays);
+                Log.d("done", "yes");
+                animation_helper.animate(inst, i);
+            }
+            catch(ArrayIndexOutOfBoundsException e){
+                Log.e("ERROR", "out of range");
             }
         });
 
+         */
     }
 
+    void incrementI(){
+        i = i+1;
+    }
 
-    void sort(int[] array, int left, int right, ArrayList<GridLayout> grid_rows,ArrayList<TextView[]> row_arrays ) {
-        if (left < right) {
+    void decrementI(){
+        i = i - 1;
+    }
 
-            while(i < 2) {
+    void merge_sort(int[] array, int left, int right, ArrayList<Instructions> inst, ArrayList<TextView[]> row_arrays ) {
+      //  while(i < 2) {
+            if (left < right) {
+
                 int m = (left + right) / 2;
-                i++;
+                increment++;
+                if(increment > 2) increment = increment - 1;
 
-                animator.divide(row_arrays.get(i), row_arrays.get(i+1), left,right,m,() -> {
-                    sort(array, left, m, grid_rows,row_arrays); //sort first half
-                  //  sort(array, m + 1, right, grid_rows,row_arrays); //sort second half
-                 //   merge(array, left, m, right);
-                 });
-                return;
+                Log.d("i", String.valueOf(increment));
+
+
+                if(increment <= row_arrays.size()-2) {
+                    inst.add(new BlinkInstruction(row_arrays.get(increment), left, right));
+                    inst.add(new SetVisibileInstruction(row_arrays.get(increment + 1), left, right, m));
+                }
+
+                merge_sort(array, left, m, inst, row_arrays); //sort first half
+                merge_sort(array, m + 1, right, inst, row_arrays); //sort second half
+                merge(array, left, m, right, inst, row_arrays);
+
             }
 
-        }
+
+       // }
     }
 
 
-        void merge ( int arr[], int l, int m, int r)
+        void merge ( int arr[], int l, int m, int r, ArrayList<Instructions> inst, ArrayList<TextView[]> row_arrays)
         {
-            Log.d("l ", String.valueOf(l));
-            Log.d("m ", String.valueOf(m));
-            Log.d("r ", String.valueOf(r));
+            Log.d("merge i",String.valueOf(increment));
+            enteredmerge++;
+            // Creating temporary subarrays
+            int[] leftArray = new int[m - l + 1];
+            int[] rightArray = new int[r - m];
 
-            // Find sizes of two subarrays to be merged
-            int n1 = m - l + 1;
-            int n2 = r - m;
+            // Copying our subarrays into temporaries
+            for (int i = 0; i < leftArray.length; i++) {
+                leftArray[i] = arr[l + i];
 
-            /* Create temp arrays */
-            int L[] = new int[n1];
-            int R[] = new int[n2];
+                    Log.e("leftArray[i]", String.valueOf(leftArray[i]));
 
-            /*Copy data to temp arrays*/
-            for (int i = 0; i < n1; ++i)
-                L[i] = arr[l + i];
-            for (int j = 0; j < n2; ++j)
-                R[j] = arr[m + 1 + j];
 
-            /* Merge the temp arrays */
 
-            // Initial indexes of first and second subarrays
-            int i = 0, j = 0;
+            }
+            for (int i = 0; i < rightArray.length; i++) {
+                rightArray[i] = arr[m + i + 1];
 
-            // Initial index of merged subarry array
-            int k = l;
-            while (i < n1 && j < n2) {
-                if (L[i] <= R[j]) {
-                    arr[k] = L[i];
-                    i++;
-                } else {
-                    arr[k] = R[j];
-                    j++;
+                    Log.e("rightArray[i]", String.valueOf(rightArray[i]));
+
+
+            }
+
+            inst.add(new HighlightInstruction(row_arrays.get(increment+1), leftArray,rightArray));
+
+            Log.d("left array", Arrays.toString(leftArray));
+            Log.d("right array", Arrays.toString(rightArray));
+
+            // Iterators containing current index of temp subarrays
+            int leftIndex = 0;
+            int rightIndex = 0;
+
+            // Copying from leftArray and rightArray back into array
+            for (int j = l; j < r + 1; j++) {
+
+                // If there are still uncopied elements in R and L, copy minimum of the two
+                if (leftIndex < leftArray.length && rightIndex < rightArray.length) {
+
+                    if (leftArray[leftIndex] < rightArray[rightIndex]) {
+
+                        inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), leftArray[leftIndex]));
+                        inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(leftArray[leftIndex]), ""));
+
+                        Log.d("leftIndex", String.valueOf(leftArray[leftIndex]));
+
+                        arr[j] = leftArray[leftIndex];
+                        inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(leftArray[leftIndex])));
+
+
+                        leftIndex++;
+
+                    } else {
+                        inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), rightArray[rightIndex]));
+                        inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(rightArray[rightIndex]), ""));
+
+                        Log.d("rightIndex", String.valueOf(rightArray[rightIndex]));
+
+
+                        arr[j] = rightArray[rightIndex];
+                        inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(rightArray[rightIndex])));
+
+                        rightIndex++;
+                    }
                 }
-                k++;
+
+
+                else if (leftIndex < leftArray.length) {
+
+                    // If all elements have been copied from rightArray, copy rest of leftArray
+                    Log.d("left remaining", String.valueOf(leftArray[leftIndex]));
+                    inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), leftArray[leftIndex]));
+                    inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(leftArray[leftIndex]), ""));
+
+
+                    arr[j] = leftArray[leftIndex];
+                    inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(leftArray[leftIndex])));
+
+
+                    leftIndex++;
+                } else if (rightIndex < rightArray.length) {
+
+                    // If all elements have been copied from leftArray, copy rest of rightArray
+                    Log.d("right remaining", String.valueOf(rightArray[rightIndex]));
+                    inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), rightArray[rightIndex]));
+                    inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(rightArray[rightIndex]), ""));
+
+
+
+                    arr[j] = rightArray[rightIndex];
+                    inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(rightArray[rightIndex])));
+
+                    rightIndex++;
+                }
             }
 
-            /* Copy remaining elements of L[] if any */
-            while (i < n1) {
-                arr[k] = L[i];
-                i++;
-                k++;
-            }
-
-            /* Copy remaining elements of R[] if any */
-            while (j < n2) {
-                arr[k] = R[j];
-                j++;
-                k++;
-            }
+            inst.add(new SetRowInvisible(row_arrays.get(increment+1)));
+            increment = increment - 1;
+            Log.d("Array", Arrays.toString(arr));
         }
+
 
         void initialize_array ( int[] array){
 

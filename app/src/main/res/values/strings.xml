@@ -16,4 +16,6 @@
     <string name="_5">5</string>
     <string name="_19">19</string>
     <string name="start">Start</string>
+    <string name="prev"><![CDATA[<]]></string>
+    <string name="next"><![CDATA[>]]></string>
 </resources>
