@@ -12,8 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:paddingTop="100dp"
-        android:paddingBottom="100dp"
         android:orientation="horizontal">
 
         <TextView
@@ -76,203 +80,106 @@
             android:textAlignment="center"
             android:textSize="22sp" />
 
+    </LinearLayout>
+
+          <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+              <LinearLayout
+                  android:layout_width="50dp"
+                  android:layout_height="50dp"
+                  android:layout_marginTop="15dp"
+                  android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/i_origPos"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="22sp" />
+              </LinearLayout>
+                <TextView
+                    android:id="@+id/iPosition"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="90dp"
+                    android:gravity="center"
+                    android:text="i"
+                    android:textColor="#ffffff"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/jPosition"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="j"
+                    android:textColor="#ffffff"
+                    android:textSize="22sp" />
+            </LinearLayout>
 
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:orientation="vertical">
 
-
         <TextView
-            android:id="@+id/ivalueTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/message"
             android:visibility="invisible"
-
-            android:text="i ="
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/jvalueTextView"
-            android:layout_width="wrap_content"
-            android:visibility="invisible"
-
-            android:layout_height="wrap_content"
-            android:text="j ="
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:gravity="center_horizontal"
-        >
-
-        <Button
-            android:id="@+id/startBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start" />
-    </LinearLayout>
-
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="30dp"
-       android:paddingStart="10dp"
-       android:orientation="vertical"
-       >
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal">
-           <TextView
-               android:id="@+id/pivotLabelTextView"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="20dp"
-               android:text="Pivot:"
-               android:visibility="invisible"
-
-               android:textColor="#ffffff"
-               android:textSize="16sp"
-               />
-           <TextView
-               android:id="@+id/pivotValueTextView"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="23dp"
-               android:layout_marginTop="20dp"
-               android:visibility="invisible"
-
-               android:textColor="#ffffff"
-               android:textSize="16sp"
-               />
-       </LinearLayout>
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal">
-        <TextView
-            android:id="@+id/highLabelTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="High:"
-            android:visibility="invisible"
-
-            android:textColor="#ffffff"
-            android:textSize="16sp"
+            android:background="#add8e6"
+            android:text=""
+            android:gravity="center"
+            android:layout_width="300dp"
+            android:layout_marginLeft="50dp"
+            android:layout_height="100dp"
             />
 
-       <TextView
-           android:id="@+id/highValueTextView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="26dp"
-           android:layout_marginTop="20dp"
-           android:text=""
-           android:visibility="invisible"
-           android:textColor="#ffffff"
-           android:textSize="16sp"
-           />
-       </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal">
-           <TextView
-                android:id="@+id/lowLabelTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Low:"
+
+            <Button
+                android:id="@+id/nextBtn"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:text=">>"
                 android:textColor="#ffffff"
-               android:visibility="invisible"
+                android:textSize="20sp"
+                />
 
-               android:textSize="16sp" />
-           <TextView
-                android:id="@+id/lowValueTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="29dp"
+
+            <Button
+                android:id="@+id/resetBtn"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:text="Reset"
                 android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:visibility="invisible"
-                 />
-       </LinearLayout>
+                android:textSize="20sp"
+                />
 
 
+        </LinearLayout>
 
 
+    </LinearLayout>
 
-   </LinearLayout>
-
-
-
-
-
-
-    <!--
-           <TextView
-               android:id="@+id/jvalueTextView"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginBottom="400dp"
-               android:text="j ="
-               android:textColor="#ffffff"
-               android:textSize="20sp"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintHorizontal_bias="0.489"
-               app:layout_constraintStart_toStartOf="parent" />
-
-
-
-
-
-
-
-           <TextView
-               android:id="@+id/jpositionTextView"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="3dp"
-               android:layout_marginTop="44dp"
-               android:fillAfter="true"
-               android:text="@string/j"
-               android:textColor="#ffffff"
-               android:textSize="15sp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintHorizontal_bias="0.123"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent" />
-
-           <TextView
-               android:id="@+id/ipositionTextView"
-               android:layout_width="0dp"
-               android:layout_height="15dp"
-               android:layout_marginStart="16dp"
-               android:layout_marginTop="44dp"
-               android:text="@string/i"
-               android:fillAfter="true"
-               android:textColor="#ffffff"
-               android:textSize="17sp"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent" />
-       -->
 </LinearLayout>
+
+
+
+
+
+

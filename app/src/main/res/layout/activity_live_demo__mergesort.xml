@@ -360,10 +360,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/message"
+            android:visibility="invisible"
+            android:background="#add8e6"
+            android:text=""
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            />
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:orientation="horizontal">
 
-        <!--
         <Button
             android:id="@+id/prevBtn"
             android:layout_width="90dp"
@@ -372,8 +387,8 @@
             android:textColor="#ffffff"
             android:textSize="20sp"
              />
-             -->
-        <!--
+
+
         <Button
             android:id="@+id/nextBtn"
             android:layout_width="90dp"
@@ -382,7 +397,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp"
              />
-             -->
+
 
         <Button
             android:id="@+id/startBtn"
@@ -394,7 +409,7 @@
             />
 
 
-
+        </LinearLayout>
 
 
     </LinearLayout>

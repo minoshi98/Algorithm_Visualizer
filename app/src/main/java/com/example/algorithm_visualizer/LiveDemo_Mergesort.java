@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -13,25 +12,22 @@ import com.example.algorithm_visualizer.instructions.BlinkInstruction;
 import com.example.algorithm_visualizer.instructions.HighlightInstruction;
 import com.example.algorithm_visualizer.instructions.Instructions;
 import com.example.algorithm_visualizer.instructions.SetMinimumTextInstruction;
+import com.example.algorithm_visualizer.instructions.SetMultipleTextInstruction;
 import com.example.algorithm_visualizer.instructions.SetRowInvisible;
 import com.example.algorithm_visualizer.instructions.SetTextInstruction;
+import com.example.algorithm_visualizer.instructions.SetTextViewInvisibleInstruction;
 import com.example.algorithm_visualizer.instructions.SetVisibileInstruction;
 import com.example.algorithm_visualizer.instructions.UnhighlightInstruction;
 
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 
 public class LiveDemo_Mergesort extends AppCompatActivity {
 
     TextView row0col0, row0col1, row0col2, row0col3, row0col4, row0col5,
             row0col6, row1col0, row1col1, row1col2, row1col3, row1col4, row1col5, row1col6, row2col0, row2col1, row2col2, row2col3,
-            row2col4, row2col5, row2col6,row3col0, row3col1, row3col2, row3col3, row3col4, row3col5, row3col6, mergeValues;
+            row2col4, row2col5, row2col6,row3col0, row3col1, row3col2, row3col3, row3col4, row3col5, row3col6, mergeValues, message;
     GridLayout firstrow,secondrow,thirdrow;
 
     Button nextBtn, prevBtn, startBtn;
@@ -42,9 +38,8 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
     //--end
 
     int increment = -1;
-    int enteredmerge = 0;
     int i = -1;
-
+    boolean rightCalled = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +79,11 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
         row3col6 = (TextView) findViewById(R.id.row3col6);
 
 
+        message = (TextView) findViewById(R.id.message);
 
         //--Buttons
-        //nextBtn = (Button) findViewById(R.id.nextBtn);
-     //   prevBtn = (Button) findViewById(R.id.prevBtn);
+        nextBtn = (Button) findViewById(R.id.nextBtn);
+        prevBtn = (Button) findViewById(R.id.prevBtn);
         startBtn = (Button) findViewById(R.id.startBtn);
 
         int[] array = new int[7];
@@ -122,35 +118,38 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
 
         ArrayList<Instructions> inst = new ArrayList<Instructions>();
         merge_sort(array,0,array.length-1, inst, row_arrays);
+
         startBtn.setOnClickListener(view -> {
-          //merge_sort(array,0,array.length-1, inst, row_arrays);
-            animation_helper.animate(inst,0);
+            animation_helper.animate(inst,0,false,true);
 
         });
-        /*
-        nextBtn.setOnClickListener(view -> {
-            incrementI();
-         //   merge_sort(array, 0, array.length - 1, inst,row_arrays);
 
-            animation_helper.animate(inst,i);
-            Log.d("INST", String.valueOf(inst.get(i)));
-       //     animation_helper.displayArrayList(textViewsToBeHighlighted);
+        nextBtn.setOnClickListener(view -> {
+            if(i == inst.size()-1){
+                inst.add(new SetTextInstruction(message,"Animation finished"));
+                incrementI();
+                animation_helper.animate(inst,i,true,false);
+                return;
+            }
+            else {
+                incrementI();
+                animation_helper.animate(inst, i, true, false);
+            }
         });
 
         prevBtn.setOnClickListener(view -> {
             try {
                 decrementI();
                 merge_sort(array, 0, array.length - 1, inst, row_arrays);
-                Log.d("done", "yes");
-                animation_helper.animate(inst, i);
+                animation_helper.animate(inst, i,true,false);
             }
             catch(ArrayIndexOutOfBoundsException e){
-                Log.e("ERROR", "out of range");
             }
         });
 
-         */
+
     }
+
 
     void incrementI(){
         i = i+1;
@@ -161,61 +160,57 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
     }
 
     void merge_sort(int[] array, int left, int right, ArrayList<Instructions> inst, ArrayList<TextView[]> row_arrays ) {
-      //  while(i < 2) {
             if (left < right) {
 
                 int m = (left + right) / 2;
                 increment++;
                 if(increment > 2) increment = increment - 1;
 
-                Log.d("i", String.valueOf(increment));
-
-
                 if(increment <= row_arrays.size()-2) {
-                    inst.add(new BlinkInstruction(row_arrays.get(increment), left, right));
-                    inst.add(new SetVisibileInstruction(row_arrays.get(increment + 1), left, right, m));
+                    if(right == array.length-1 && left == 0)
+                        inst.add(new BlinkInstruction(row_arrays.get(increment), left, right,"Select entire array",message));
+                    else if(rightCalled)
+                        inst.add(new BlinkInstruction(row_arrays.get(increment), left, right,"Select right sub array",message));
+                    else
+                        inst.add(new BlinkInstruction(row_arrays.get(increment), left, right,"Select left sub array",message));
+
+                    inst.add(new SetVisibileInstruction(row_arrays.get(increment + 1), left, right, m,"Split array as evenly as possible",message));
                 }
 
+                rightCalled = false;
                 merge_sort(array, left, m, inst, row_arrays); //sort first half
+                rightCalled = true;
                 merge_sort(array, m + 1, right, inst, row_arrays); //sort second half
                 merge(array, left, m, right, inst, row_arrays);
 
             }
 
 
-       // }
     }
 
 
         void merge ( int arr[], int l, int m, int r, ArrayList<Instructions> inst, ArrayList<TextView[]> row_arrays)
         {
-            Log.d("merge i",String.valueOf(increment));
-            enteredmerge++;
             // Creating temporary subarrays
             int[] leftArray = new int[m - l + 1];
             int[] rightArray = new int[r - m];
 
             // Copying our subarrays into temporaries
-            for (int i = 0; i < leftArray.length; i++) {
+            for (int i = 0; i < leftArray.length; i++)
                 leftArray[i] = arr[l + i];
 
-                    Log.e("leftArray[i]", String.valueOf(leftArray[i]));
 
-
-
-            }
-            for (int i = 0; i < rightArray.length; i++) {
+            for (int i = 0; i < rightArray.length; i++)
                 rightArray[i] = arr[m + i + 1];
 
-                    Log.e("rightArray[i]", String.valueOf(rightArray[i]));
 
+            if(r - l == 1)
+                inst.add(new SetMultipleTextInstruction(row_arrays.get(increment), leftArray,rightArray,"An array of length 1 cannot be split, ready for merge",message));
+            else
+                inst.add(new SetMultipleTextInstruction(row_arrays.get(increment), leftArray,rightArray,"Merge selected arrays back together, in sorted order",message));
 
-            }
 
             inst.add(new HighlightInstruction(row_arrays.get(increment+1), leftArray,rightArray));
-
-            Log.d("left array", Arrays.toString(leftArray));
-            Log.d("right array", Arrays.toString(rightArray));
 
             // Iterators containing current index of temp subarrays
             int leftIndex = 0;
@@ -229,26 +224,21 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
 
                     if (leftArray[leftIndex] < rightArray[rightIndex]) {
 
-                        inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), leftArray[leftIndex]));
-                        inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(leftArray[leftIndex]), ""));
-
-                        Log.d("leftIndex", String.valueOf(leftArray[leftIndex]));
+                        inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), leftArray[leftIndex],"Select minimum value",message));
+                        inst.add(new SetTextViewInvisibleInstruction(row_arrays.get(increment+1), String.valueOf(leftArray[leftIndex])));
 
                         arr[j] = leftArray[leftIndex];
-                        inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(leftArray[leftIndex])));
+                        inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(leftArray[leftIndex]),"Add value to the sorted array",message));
 
 
                         leftIndex++;
 
                     } else {
-                        inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), rightArray[rightIndex]));
-                        inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(rightArray[rightIndex]), ""));
-
-                        Log.d("rightIndex", String.valueOf(rightArray[rightIndex]));
-
+                        inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), rightArray[rightIndex],"Select minimum value",message));
+                        inst.add(new SetTextViewInvisibleInstruction(row_arrays.get(increment+1), String.valueOf(rightArray[rightIndex])));
 
                         arr[j] = rightArray[rightIndex];
-                        inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(rightArray[rightIndex])));
+                        inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(rightArray[rightIndex]),"Add value to the sorted array",message));
 
                         rightIndex++;
                     }
@@ -258,27 +248,25 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
                 else if (leftIndex < leftArray.length) {
 
                     // If all elements have been copied from rightArray, copy rest of leftArray
-                    Log.d("left remaining", String.valueOf(leftArray[leftIndex]));
-                    inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), leftArray[leftIndex]));
-                    inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(leftArray[leftIndex]), ""));
+                    inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), leftArray[leftIndex],"Select remaining value",message));
+                    inst.add(new SetTextViewInvisibleInstruction(row_arrays.get(increment+1), String.valueOf(leftArray[leftIndex])));
 
 
                     arr[j] = leftArray[leftIndex];
-                    inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(leftArray[leftIndex])));
+                    inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(leftArray[leftIndex]),"Add value to the sorted array",message));
 
 
                     leftIndex++;
                 } else if (rightIndex < rightArray.length) {
 
                     // If all elements have been copied from leftArray, copy rest of rightArray
-                    Log.d("right remaining", String.valueOf(rightArray[rightIndex]));
-                    inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), rightArray[rightIndex]));
-                    inst.add(new SetTextInstruction(row_arrays.get(increment+1), String.valueOf(rightArray[rightIndex]), ""));
+                    inst.add(new UnhighlightInstruction(row_arrays.get(increment+1), rightArray[rightIndex],"Select remaining value",message));
+                    inst.add(new SetTextViewInvisibleInstruction(row_arrays.get(increment+1), String.valueOf(rightArray[rightIndex])));
 
 
 
                     arr[j] = rightArray[rightIndex];
-                    inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(rightArray[rightIndex])));
+                    inst.add(new SetMinimumTextInstruction(row_arrays.get(increment)[j], String.valueOf(rightArray[rightIndex]),"Add value to the sorted array",message));
 
                     rightIndex++;
                 }
@@ -286,7 +274,6 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
 
             inst.add(new SetRowInvisible(row_arrays.get(increment+1)));
             increment = increment - 1;
-            Log.d("Array", Arrays.toString(arr));
         }
 
 

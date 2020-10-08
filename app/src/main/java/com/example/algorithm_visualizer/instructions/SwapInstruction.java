@@ -5,12 +5,16 @@ import android.widget.TextView;
 public  class SwapInstruction implements Instructions {
 
 
-    private TextView leftTextView, rightTextView;
+    private TextView leftTextView, rightTextView, setTextView;
+    private String text;
 
-    public SwapInstruction(TextView[] arr, TextView left, TextView right) {
+
+    public SwapInstruction(TextView left, TextView right,String text, TextView setTextView) {
 
         leftTextView = left;
         rightTextView =  right;
+        this.setTextView = setTextView;
+        this.text = text;
 
     }
 
@@ -20,4 +24,7 @@ public  class SwapInstruction implements Instructions {
     public TextView getRightTextView(){
         return rightTextView;
     }
+    public String getText(){return text;}
+    public TextView getSetTextView(){return setTextView;}
+
 }

@@ -3,20 +3,19 @@ package com.example.algorithm_visualizer.instructions;
 import android.widget.TextView;
 
 public class SetTextInstruction implements Instructions{
-    private TextView[] row;
-    private String findValue, setValue;
+    private TextView textView;
+    private String text;
 
 
-    public SetTextInstruction(TextView[] row, String findValue, String setValue){
-        this.row = row;
-        this.findValue = findValue;
-        this.setValue = setValue;
+    public SetTextInstruction(TextView textView, String text){
+        this.textView = textView;
+        this.text = text;
     }
 
-    public TextView[] getRow(){
-        return row;
+    public TextView getTextView(){
+        return textView;
     }
-    public String getFindValue() { return findValue;}
-    public String getSetValue () { return  setValue;}
+    public String getText(){ return text;}
+
 
 }

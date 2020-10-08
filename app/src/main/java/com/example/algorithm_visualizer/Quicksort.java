@@ -32,7 +32,7 @@ public class Quicksort extends AppCompatActivity {
 
     }
 
-    public void openNewActivity(){
+    public void openNewActivity() {
         Intent intent2 = new Intent(this, LiveDemo_Quicksort.class);
         startActivity(intent2);
     }
