@@ -18,13 +18,12 @@ import com.example.algorithm_visualizer.instructions.SwapInstruction;
 import com.example.algorithm_visualizer.instructions.UnhighlightInstruction;
 
 public class LiveDemo_Quicksort extends AppCompatActivity {
-    Button nextBtn;
+    Button nextBtn, resetBtn;
     TextView thirtyTextView, tenTextView, fortyTextView, nineTextView, twentyTextView, twentyfiveTextView,iPosition, jPosition, i_origPos,message;
 
     Animation_Helper animation_helper = new Animation_Helper();
 
-    int i = -1;
-    boolean afterPartitionCalled = false;
+    int i = -1; //used to go through the instructions list
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,23 +45,24 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
 
         //---Buttons------
         nextBtn = (Button) findViewById(R.id.nextBtn);
+        resetBtn = (Button) findViewById(R.id.resetBtn);
 
         TextView[] textView_array = new TextView[6];
-        int[] array = new int[6];
+        int[] array = {30,10,40,9,20,25};
         initialize_textView_array(textView_array);
-        initialize_array(array);
         ArrayList<Instructions> instructions = new ArrayList<>();
-
         instructions.add(new SetTextInstruction(message,"Partition starts"));
         quicksort(array,0,array.length-1,instructions,textView_array);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                incrementI();
-                animation_helper.animate(instructions,i,true,false);
-            }
+        resetBtn.setOnClickListener(view -> {
+            this.recreate();
+        });
 
+
+        nextBtn.setOnClickListener(view -> {
+
+            incrementI();
+            animation_helper.animate(instructions,i);
         });
     }
 
@@ -77,11 +77,7 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
             int pi = partition(arr,low,high,inst,textView_array);
 
             //pivot is at right place
-            if(!afterPartitionCalled)
-                inst.add(new SetTextInstruction(message,"Now repeat process for left sub array"));
             quicksort(arr,low, (pi-1),inst,textView_array); //before partition
-            afterPartitionCalled = true;
-            inst.add(new SetTextInstruction(message,"Now repeat process for right sub array"));
             quicksort(arr, (pi+1), high,inst,textView_array); //after partition
 
         }
@@ -117,16 +113,18 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
                         pivot + " so increment i", message));
 
                 //add pairs
+                //add pairs
                 TextView pair[] = new TextView[2];
                 pair[0] = textView_array[i];
                 pair[1] = textView_array[j];
                 if(i == j) inst.add(new SetTextInstruction(message,"i == j so nothing is swapped"));
-                else inst.add(new SwapInstruction(pair[0], pair[1], "Then swap i and j",message));
+            //    else inst.add(new SwapInstruction(pair[0], pair[1], "Then swap i and j",message));
 
                 //swap arr[i] and arr[j]
                 temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
+
 
                 //swap textview[i] and textview[j]
                 TextView temp2 = textView_array[i];
@@ -146,9 +144,9 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
         pair[0] = textView_array[i+1];
         pair[1] = textView_array[high];
         if((i+1) == high) inst.add(new SetTextInstruction(message,"Pivot is already in correct position"));
-        else inst.add(new SwapInstruction(pair[0], pair[1], "Place pivot in correct position so that elements " +
-                "less than the pivot are to the left of the pivot and " +
-                "elements greater are to the right of the pivot",message));
+      //  else inst.add(new SwapInstruction(pair[0], pair[1], "Place pivot in correct position so that elements " +
+             //   "less than the pivot are to the left of the pivot and " +
+           //     "elements greater are to the right of the pivot",message));
 
         //swap arr[i+1] and arr[high]
         temp = arr[i+1];
@@ -160,6 +158,8 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
         TextView temp2 = textView_array[i+1];
         textView_array[i+1] = textView_array[high];
         textView_array[high] = temp2;
+
+
 
         inst.add(new SetTextInstruction(message,"Pivot is now in the correct position"));
         inst.add(new UnhighlightInstruction(textView_array,arr[i+1],"Partition is done",message));
@@ -179,15 +179,6 @@ public class LiveDemo_Quicksort extends AppCompatActivity {
 
     }
 
-    public void initialize_array(int[] array){
-        array[0] = (Integer.parseInt(thirtyTextView.getText().toString()));
-        array[1] = (Integer.parseInt(tenTextView.getText().toString()));
-        array[2] = (Integer.parseInt(fortyTextView.getText().toString()));
-        array[3] = (Integer.parseInt(nineTextView.getText().toString()));
-        array[4] = (Integer.parseInt(twentyTextView.getText().toString()));
-        array[5] = (Integer.parseInt(twentyfiveTextView.getText().toString()));
-
-    }
 
 
 

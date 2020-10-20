@@ -27,19 +27,21 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
 
     TextView row0col0, row0col1, row0col2, row0col3, row0col4, row0col5,
             row0col6, row1col0, row1col1, row1col2, row1col3, row1col4, row1col5, row1col6, row2col0, row2col1, row2col2, row2col3,
-            row2col4, row2col5, row2col6,row3col0, row3col1, row3col2, row3col3, row3col4, row3col5, row3col6, mergeValues, message;
+            row2col4, row2col5, row2col6,row3col0, row3col1, row3col2, row3col3, row3col4, row3col5, row3col6, message;
     GridLayout firstrow,secondrow,thirdrow;
 
-    Button nextBtn, prevBtn, startBtn;
+    Button nextBtn, resetBtn;
 
     //Animation helpers
     Animation_Helper animation_helper = new Animation_Helper();
 
-    //--end
 
     int increment = -1;
     int i = -1;
     boolean rightCalled = false;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +85,7 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
 
         //--Buttons
         nextBtn = (Button) findViewById(R.id.nextBtn);
-        prevBtn = (Button) findViewById(R.id.prevBtn);
-        startBtn = (Button) findViewById(R.id.startBtn);
+        resetBtn = (Button) findViewById(R.id.resetBtn);
 
         int[] array = new int[7];
 
@@ -117,35 +118,26 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
         row_arrays.add(fourthrow_array);
 
         ArrayList<Instructions> inst = new ArrayList<Instructions>();
-        merge_sort(array,0,array.length-1, inst, row_arrays);
 
-        startBtn.setOnClickListener(view -> {
-            animation_helper.animate(inst,0,false,true);
-
+        resetBtn.setOnClickListener(view -> {
+            this.recreate();
         });
+        merge_sort(array,0,array.length-1, inst, row_arrays);
 
         nextBtn.setOnClickListener(view -> {
             if(i == inst.size()-1){
                 inst.add(new SetTextInstruction(message,"Animation finished"));
                 incrementI();
-                animation_helper.animate(inst,i,true,false);
+                animation_helper.animate(inst,i);
                 return;
             }
             else {
                 incrementI();
-                animation_helper.animate(inst, i, true, false);
+                animation_helper.animate(inst, i);
             }
         });
 
-        prevBtn.setOnClickListener(view -> {
-            try {
-                decrementI();
-                merge_sort(array, 0, array.length - 1, inst, row_arrays);
-                animation_helper.animate(inst, i,true,false);
-            }
-            catch(ArrayIndexOutOfBoundsException e){
-            }
-        });
+
 
 
     }
@@ -155,9 +147,6 @@ public class LiveDemo_Mergesort extends AppCompatActivity {
         i = i+1;
     }
 
-    void decrementI(){
-        i = i - 1;
-    }
 
     void merge_sort(int[] array, int left, int right, ArrayList<Instructions> inst, ArrayList<TextView[]> row_arrays ) {
             if (left < right) {

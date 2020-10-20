@@ -32,7 +32,15 @@ public class MainActivity extends AppCompatActivity {
         quicksortBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openNewActivity();
+                openQuickSortActivity();
+
+            }
+        });
+
+        insertionSortBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openInsertionSortActivity();
 
             }
         });
@@ -40,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openNewActivity(){
+    public void openQuickSortActivity(){
         Intent intent = new Intent(this, Quicksort.class);
         startActivity(intent);
     }
@@ -50,5 +58,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void openInsertionSortActivity(){
+        Intent intent = new Intent(this, InsertionSort.class);
+        startActivity(intent);
+    }
 }

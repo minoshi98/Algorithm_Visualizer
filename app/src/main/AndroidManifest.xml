@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.algorithm_visualizer.LiveDemo_Mergesort"></activity>
-        <activity android:name="com.example.algorithm_visualizer.Mergesort" />
-        <activity android:name="com.example.algorithm_visualizer.LiveDemo_Quicksort" />
-        <activity android:name="com.example.algorithm_visualizer.Quicksort" />
-        <activity android:name="com.example.algorithm_visualizer.MainActivity">
+        <activity android:name=".LiveDemo_InsertionSort"></activity>
+        <activity android:name=".InsertionSort" />
+        <activity android:name=".LiveDemo_Mergesort" />
+        <activity android:name=".Mergesort" />
+        <activity android:name=".LiveDemo_Quicksort" />
+        <activity android:name=".Quicksort" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

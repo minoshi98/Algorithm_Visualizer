@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4B1032"
+    tools:context=".InsertionSort">
+
+    <Button
+        android:id="@+id/quicksortComplexities"
+        android:layout_width="231dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/btn_round"
+        android:text="Time/Space Complexities"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quicksortDemo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/quicksortDemo"
+        android:layout_width="231dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/btn_round"
+        android:text="Live demo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quicksortDefinition" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif"
+        android:text="InsertionSort"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="105dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="4dp"
+        android:background="#b5213c"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/quicksortDefinition"
+        android:layout_width="231dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/btn_round"
+        android:text="What is insertion sort?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,9 +11,11 @@ public class HighlightTextViewInstruction implements Instructions {
         this.textView = textView;
         this.text = text;
         this.setTextView = setTextView;
+
     }
 
     public TextView getTextView(){return textView;}
     public String getText(){return text;}
     public TextView getSetTextView(){return setTextView;}
+
 }

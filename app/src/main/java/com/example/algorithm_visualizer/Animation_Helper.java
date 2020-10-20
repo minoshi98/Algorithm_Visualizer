@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.example.algorithm_visualizer.instructions.BlinkInstruction;
 import com.example.algorithm_visualizer.instructions.HighlightInstruction;
+import com.example.algorithm_visualizer.instructions.HighlightMultipleTextViewsInstruction;
 import com.example.algorithm_visualizer.instructions.HighlightTextViewInstruction;
 import com.example.algorithm_visualizer.instructions.Instructions;
 import com.example.algorithm_visualizer.instructions.MoveTextViewInstruction;
@@ -29,7 +30,6 @@ import com.example.algorithm_visualizer.instructions.UnhighlightInstruction;
 
 
 public class Animation_Helper {
-//LiveDemo_Mergesort liveDemo_mergesort = new LiveDemo_Mergesort();
     public interface OnAnimationEnd {
         void func();
     }
@@ -76,95 +76,81 @@ public class Animation_Helper {
 
 
 
-    public void animate(List<Instructions> instructions, int i, boolean nextBtnCalled, boolean startBtnCalled ) {
+    public void animate(List<Instructions> instructions, int i ) {
 
         if (i >= instructions.size()) {
             return;
         }
         if (instructions.get(i) instanceof SwapInstruction) {
             SwapInstruction swapInstruction = (SwapInstruction) instructions.get(i);
-            swapElements(swapInstruction.getLeftTextView(), swapInstruction.getRightTextView(),swapInstruction.getText(),swapInstruction.getSetTextView(),()  -> {
-                Log.d("MINO","SWAP");
-                if(nextBtnCalled)
+            swapElements(swapInstruction.getTextView_array(),swapInstruction.getFirstIndex(),swapInstruction.getSecondIndex(), swapInstruction.getLeftTextView(),swapInstruction.getRightTextView(),swapInstruction.getText(),swapInstruction.getSetTextView(),()   -> {
                     return;
-                else
-                 animate(instructions, i + 1,true,false);
+
             });
-         //   return;
 
         } else if (instructions.get(i) instanceof BlinkInstruction) {
             BlinkInstruction blinkInstruction = (BlinkInstruction) instructions.get(i);
             blink(blinkInstruction.getCurrentrow(),blinkInstruction.getLeft(),blinkInstruction.getRight(),blinkInstruction.getText(),blinkInstruction.getTextView(),() -> {
-                Log.d("MINO","BLINK");
 
-                if(nextBtnCalled)
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
 
             });
         }
         else if (instructions.get(i) instanceof SetVisibileInstruction) {
             SetVisibileInstruction setVisibileInstruction = (SetVisibileInstruction) instructions.get(i);
             setVisibility(setVisibileInstruction.getRow(),setVisibileInstruction.getLeft(),setVisibileInstruction.getRight(),setVisibileInstruction.getM(),setVisibileInstruction.getText(),setVisibileInstruction.getTextView(),() -> {
-               // return;
-                Log.d("MINO","SETVISIBLE");
 
-                if(nextBtnCalled)
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
             });
         }
         else if (instructions.get(i) instanceof HighlightInstruction) {
             HighlightInstruction highlightInstruction = (HighlightInstruction) instructions.get(i);
             highlight(highlightInstruction.getRow(),highlightInstruction.getLeftArray(),highlightInstruction.getRightArray(),()  -> {
-              //  return;
-                Log.d("MINO","HIGHLIGHT");
 
-                if(nextBtnCalled)
+
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
+            } );
+        }
+        else if (instructions.get(i) instanceof HighlightMultipleTextViewsInstruction) {
+            HighlightMultipleTextViewsInstruction highlightMultipleTextViewsInstruction = (HighlightMultipleTextViewsInstruction) instructions.get(i);
+            highlightMultipleTextViews(highlightMultipleTextViewsInstruction.getTextViews(),highlightMultipleTextViewsInstruction.getStart(),
+                    highlightMultipleTextViewsInstruction.getEnd(),highlightMultipleTextViewsInstruction.getText(),
+                    highlightMultipleTextViewsInstruction.getTextView(),()  -> {
+
+
+                return;
 
             } );
         }
         else if (instructions.get(i) instanceof UnhighlightInstruction) {
             UnhighlightInstruction unhighlightInstruction = (UnhighlightInstruction) instructions.get(i);
             unhighlight(unhighlightInstruction.getRow(), unhighlightInstruction.getValue(),unhighlightInstruction.getText(),unhighlightInstruction.getTextView(),()  -> {
-              //  return;
-                Log.d("MINO","UNHIGHLIGHT");
 
-                if(nextBtnCalled)
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
 
             } );
         }
         else if (instructions.get(i) instanceof SetTextInstruction) {
             SetTextInstruction setTextInstruction = (SetTextInstruction) instructions.get(i);
             setText(setTextInstruction.getTextView(),setTextInstruction.getText(),() -> {
-              //  return;
-                Log.d("MINO","SETTEXT");
 
-                if(nextBtnCalled)
+
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
 
             } );
         }
         else if (instructions.get(i) instanceof SetRowInvisible) {
             SetRowInvisible setRowInvisible = (SetRowInvisible) instructions.get(i);
             setRowInvisible(setRowInvisible.getRow(), () -> {
-            //    return;
-                Log.d("MINO","SETROW");
 
-                if(nextBtnCalled)
+
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
 
             } );
         }
@@ -172,65 +158,48 @@ public class Animation_Helper {
         else if (instructions.get(i) instanceof SetMinimumTextInstruction) {
             SetMinimumTextInstruction setMinimumTextInstruction = (SetMinimumTextInstruction) instructions.get(i);
             setMinimumText(setMinimumTextInstruction.getTextView(), setMinimumTextInstruction.getValue(),setMinimumTextInstruction.getText(),setMinimumTextInstruction.getSetTextView(),()  -> {
-                //return;
-                Log.d("MINO","SETMIN");
 
-                if(nextBtnCalled)
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
 
             } );
         }
         else if (instructions.get(i) instanceof SetMultipleTextInstruction) {
             SetMultipleTextInstruction setMultipleTextInstruction = (SetMultipleTextInstruction) instructions.get(i);
             setMultipleTexts(setMultipleTextInstruction.getRow(), setMultipleTextInstruction.getLeftArray(),setMultipleTextInstruction.getRightArray(),setMultipleTextInstruction.getText(),setMultipleTextInstruction.getTextView(),()  -> {
-                //return;
-                Log.d("MINO","SETMULTIPLE");
 
-                if(nextBtnCalled)
+
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
 
             } );
         }
         else if (instructions.get(i) instanceof MoveTextViewInstruction) {
             MoveTextViewInstruction moveTextViewInstruction = (MoveTextViewInstruction) instructions.get(i);
             moveTextView(moveTextViewInstruction.getFirstPos(), moveTextViewInstruction.getSecondPos(),moveTextViewInstruction.getText(),moveTextViewInstruction.getSetTextView(),()  -> {
-                //return;
-                Log.d("MINO","MOVETEXTVIEW");
 
-                if(nextBtnCalled)
+
+
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
+
 
             } );
         }
         else if (instructions.get(i) instanceof HighlightTextViewInstruction) {
             HighlightTextViewInstruction highlightTextViewInstruction = (HighlightTextViewInstruction) instructions.get(i);
             highlightTextView(highlightTextViewInstruction.getTextView(), highlightTextViewInstruction.getText(),highlightTextViewInstruction.getSetTextView(),()  -> {
-                //return;
-                Log.d("MINO","HIGHLIGHTTEXTVIEW");
 
-                if(nextBtnCalled)
+
+
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
 
             } );
         }
         else if (instructions.get(i) instanceof SetTextViewInvisibleInstruction) {
             SetTextViewInvisibleInstruction setTextViewInvisibleInstruction = (SetTextViewInvisibleInstruction) instructions.get(i);
             setTextViewInvisible(setTextViewInvisibleInstruction.getRow(), setTextViewInvisibleInstruction.getValue(),()  -> {
-                //return;
-                Log.d("MINO","SETTEXTVIEWINVIS");
 
-                if(nextBtnCalled)
+
                     return;
-                else
-                    animate(instructions, i + 1,false,true);
 
             } );
         }
@@ -256,6 +225,8 @@ public class Animation_Helper {
         onAnimationEnd.func();
     }
     public void moveTextView(TextView firstPos, TextView secondPos,String text, TextView setTextView, OnAnimationEnd onAnimationEnd) {
+
+        Log.d("second pos", secondPos.getText().toString());
 
         if(setTextView.getVisibility() == View.INVISIBLE) setTextView.setVisibility(View.VISIBLE);
         setTextView.setText(text);
@@ -288,7 +259,16 @@ public class Animation_Helper {
 
 
     }
-    public void swapElements(TextView firstPos, TextView secondPos,String text, TextView setTextView, OnAnimationEnd onAnimationEnd) {
+    public void swapElements(TextView[] textView_array, int firstIndex, int secondIndex, TextView firstPos, TextView secondPos,String text, TextView setTextView, OnAnimationEnd onAnimationEnd) {
+
+
+        for(TextView textView: textView_array){
+            Log.d("TEXTVIEW",Arrays.toString(textView_array));
+        }
+
+        Log.e("firstIndex", String.valueOf(firstPos));
+        Log.e("secondIndex", String.valueOf(secondPos));
+
 
         if(setTextView.getVisibility() == View.INVISIBLE) setTextView.setVisibility(View.VISIBLE);
         setTextView.setText(text);
@@ -296,8 +276,8 @@ public class Animation_Helper {
         int[] i_location = new int[2];
         int[] j_location = new int[2];
 
-        firstPos.getLocationOnScreen(i_location);
-        secondPos.getLocationOnScreen(j_location);
+        textView_array[firstIndex].getLocationOnScreen(i_location);
+        textView_array[secondIndex].getLocationOnScreen(j_location);
 
 
 
@@ -305,7 +285,7 @@ public class Animation_Helper {
         right.setDuration(1000);
         right.addUpdateListener(valueAnimator -> {
             float progress = (float) valueAnimator.getAnimatedValue();
-            firstPos.setX(progress);
+            textView_array[firstIndex].setX(progress);
         });
 
 
@@ -313,17 +293,28 @@ public class Animation_Helper {
         left.setDuration(1000);
         left.addUpdateListener(valueAnimator -> {
             float progress = (float) valueAnimator.getAnimatedValue();
-            secondPos.setX(progress);
+            textView_array[secondIndex].setX(progress);
         });
 
         AnimatorSet set = new AnimatorSet();
 
         set.playTogether(right, left);
         set.start();
+
+
+
+
         set.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
+
+
+
+                TextView temp = textView_array[firstIndex];
+                textView_array[firstIndex] = textView_array[secondIndex];
+                textView_array[secondIndex] = temp;
+
 
                 onAnimationEnd.func();
 
@@ -454,6 +445,38 @@ public class Animation_Helper {
                 });
             }
         }
+
+
+    }
+
+    public void highlightMultipleTextViews(TextView[] textViews, int start, int end, String text, TextView setTextView, OnAnimationEnd onAnimationEnd){
+
+        int colorFrom = Color.parseColor("#ffffff");
+        int colorTo = Color.parseColor("#7fbf7f");
+
+        setTextView.setText(text);
+
+        for(int i = start; i <= end; i++ ){
+            ValueAnimator newColor = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            newColor.setDuration(1000); // milliseconds
+            int finalI = i;
+            newColor.addUpdateListener(animator -> textViews[finalI].setBackgroundColor((int) animator.getAnimatedValue()));
+
+            newColor.start();
+
+            if (i == end) {
+                newColor.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+
+                        onAnimationEnd.func();
+
+                    }
+                });
+            }
+        }
+
 
 
     }
